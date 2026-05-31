@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joul — Daily Reflections</title>
+  <!-- Google Fonts for premium notebook feel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Caveat:wght@500;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="font-theme-modern">
+  <div class="desk-mat">
+    <header class="app-branding">
+      <div class="logo">
+        <i class="fa-solid fa-feather-pointed"></i>
+        <span>Joul</span>
+      </div>
+      <div class="header-controls">
+        <button class="btn-theme-toggle" id="btn-theme-toggle" title="Toggle Light/Dark Theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <div class="sync-banner" id="sync-banner">
+          <button class="btn btn-sync" id="btn-select-folder">
+            <i class="fa-solid fa-folder-open"></i>
+            <span>Set Local Sync Folder</span>
+          </button>
+          <span class="sync-status" id="sync-status">
+            <i class="fa-solid fa-circle-notch fa-spin"></i> Saving locally to browser storage
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <main class="notebook-container">
+      <!-- LEFT PAGE: Header, Description & Important Notes -->
+      <section class="notebook-page page-left">
+        <div class="page-content">
+          <!-- Header Section -->
+          <header class="journal-header">
+            <div class="header-grid">
+              <div class="field-box date-box">
+                <label for="journal-date">Date</label>
+                <input type="date" id="journal-date" class="handwritten-input">
+              </div>
+              <div class="field-box day-box">
+                <label for="journal-day">Day</label>
+                <input type="text" id="journal-day" class="handwritten-input" placeholder="e.g. Sunday" readonly>
+              </div>
+              <div class="field-box time-box">
+                <label for="wake-time"><i class="fa-solid fa-sun text-amber"></i> Wake-up</label>
+                <input type="time" id="wake-time" class="handwritten-input">
+              </div>
+              <div class="field-box time-box">
+                <label for="sleep-time"><i class="fa-solid fa-moon text-indigo"></i> Sleep</label>
+                <input type="time" id="sleep-time" class="handwritten-input">
+              </div>
+            </div>
+            <div class="header-divider"></div>
+          </header>
+
+          <!-- Description Section -->
+          <section class="journal-section description-section">
+            <h2 class="section-title"><i class="fa-solid fa-pen-nib"></i> Description</h2>
+            <div class="paper-lines">
+              <textarea id="description-input" class="handwritten-textarea" placeholder="Write your daily summary here... How was your day? What did you discover? How did you feel?"></textarea>
+            </div>
+          </section>
+
+          <!-- Important Notes Section -->
+          <section class="journal-section notes-section">
+            <h2 class="section-title"><i class="fa-solid fa-star"></i> Important Notes</h2>
+            <div class="paper-lines">
+              <textarea id="notes-input" class="handwritten-textarea" placeholder="Key takeaways, learnings, or thoughts you want to remember..."></textarea>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- RIGHT PAGE: Triple column layout (WIN, FAIL, NEXT) & Habit Tracker -->
+      <section class="notebook-page page-right">
+        <div class="page-content">
+          <!-- The Tri-Column Layout: WIN, FAIL, NEXT -->
+          <section class="tri-columns-section">
+            <div class="tri-column column-win">
+              <h3 class="column-title"><i class="fa-solid fa-trophy"></i> WIN</h3>
+              <div class="column-paper">
+                <textarea id="win-input" class="handwritten-textarea" placeholder="Celebrate daily achievements..."></textarea>
+              </div>
+            </div>
+            
+            <div class="tri-column column-fail">
+              <h3 class="column-title"><i class="fa-solid fa-triangle-exclamation"></i> FAIL</h3>
+              <div class="column-paper">
+                <textarea id="fail-input" class="handwritten-textarea" placeholder="Setbacks & lessons learned..."></textarea>
+              </div>
+            </div>
+            
+            <div class="tri-column column-next">
+              <h3 class="column-title"><i class="fa-solid fa-forward-step"></i> NEXT</h3>
+              <div class="column-paper">
+                <textarea id="next-input" class="handwritten-textarea" placeholder="Next steps or focus areas..."></textarea>
+              </div>
+            </div>
+          </section>
+
+          <!-- Habit Tracker Section -->
+          <section class="journal-section habit-section">
+            <h2 class="section-title"><i class="fa-solid fa-circle-check"></i> Habit Tracker</h2>
+            <p class="section-subtitle">List and track your 5 custom daily habits (Double-click habit names to edit them)</p>
+            
+            <div class="habits-list">
+              <!-- Habit Item 1 -->
+              <div class="habit-item">
+                <label class="custom-checkbox">
+                  <input type="checkbox" id="habit-check-1">
+                  <span class="checkmark"></span>
+                </label>
+                <div class="habit-label-wrapper">
+                  <input type="text" id="habit-name-1" class="habit-name-input handwritten-input" value="8 hrs of sleep" title="Double click to edit">
+                </div>
+              </div>
+
+              <!-- Habit Item 2 -->
+              <div class="habit-item">
+                <label class="custom-checkbox">
+                  <input type="checkbox" id="habit-check-2">
+                  <span class="checkmark"></span>
+                </label>
+                <div class="habit-label-wrapper">
+                  <input type="text" id="habit-name-2" class="habit-name-input handwritten-input" value="Drink 3L water" title="Double click to edit">
+                </div>
+              </div>
+
+              <!-- Habit Item 3 -->
+              <div class="habit-item">
+                <label class="custom-checkbox">
+                  <input type="checkbox" id="habit-check-3">
+                  <span class="checkmark"></span>
+                </label>
+                <div class="habit-label-wrapper">
+                  <input type="text" id="habit-name-3" class="habit-name-input handwritten-input" value="Exercise 30 mins" title="Double click to edit">
+                </div>
+              </div>
+
+              <!-- Habit Item 4 -->
+              <div class="habit-item">
+                <label class="custom-checkbox">
+                  <input type="checkbox" id="habit-check-4">
+                  <span class="checkmark"></span>
+                </label>
+                <div class="habit-label-wrapper">
+                  <input type="text" id="habit-name-4" class="habit-name-input handwritten-input" value="Read 10 pages" title="Double click to edit">
+                </div>
+              </div>
+
+              <!-- Habit Item 5 -->
+              <div class="habit-item">
+                <label class="custom-checkbox">
+                  <input type="checkbox" id="habit-check-5">
+                  <span class="checkmark"></span>
+                </label>
+                <div class="habit-label-wrapper">
+                  <input type="text" id="habit-name-5" class="habit-name-input handwritten-input" value="Meditate 10 mins" title="Double click to edit">
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Action buttons and stats in the footer of page-right -->
+          <footer class="page-right-footer">
+            <div class="action-buttons">
+              <button class="btn btn-primary" id="btn-manual-download">
+                <i class="fa-solid fa-download"></i> Save as File
+              </button>
+              <button class="btn btn-secondary" id="btn-clear-page">
+                <i class="fa-solid fa-rotate-left"></i> Reset Draft
+              </button>
+            </div>
+            <div class="saved-indicator" id="saved-indicator">
+              <i class="fa-solid fa-cloud-arrow-up"></i> Auto-saved
+            </div>
+          </footer>
+        </div>
+      </section>
+    </main>
+
+    <!-- Interactive Sidebar/History and Settings Panel -->
+    <aside class="sidebar-panel">
+      <div class="sidebar-tab" id="sidebar-toggle">
+        <i class="fa-solid fa-book-open"></i>
+        <span>Journal Index</span>
+      </div>
+      <div class="sidebar-content">
+        <h3><i class="fa-solid fa-folder-tree"></i> Past Entries</h3>
+        <p class="sidebar-desc">Select a date to view or edit previous entries. Updates are autosaved.</p>
+        
+        <div class="calendar-nav">
+          <button class="btn-icon" id="btn-prev-day" title="Previous Day"><i class="fa-solid fa-chevron-left"></i></button>
+          <span class="calendar-display" id="calendar-display">May 31, 2026</span>
+          <button class="btn-icon" id="btn-next-day" title="Next Day"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+
+        <ul class="entries-list" id="entries-list">
+          <!-- Dynamically populated past entries -->
+          <li class="empty-list-message">No entries created yet</li>
+        </ul>
+
+        <div class="sidebar-footer">
+          <div class="theme-controls">
+            <span>Font Style:</span>
+            <div class="font-toggle-group">
+              <button class="btn-toggle" data-font="handwritten" title="Handwritten font">Ink</button>
+              <button class="btn-toggle active" data-font="modern" title="Clean modern font">Clean</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast" id="toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toast-message">Draft successfully saved.</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

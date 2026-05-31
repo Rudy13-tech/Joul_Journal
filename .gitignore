@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Production / build outputs
+dist/
+
+# Local/Personal Journal Data (Highly recommended to exclude so your private entries are not made public on GitHub)
+JOUL DATA/
+
+# Tool metadata
+.antigravitycli/
+
+# OS Files
+.DS_Store
+Thumbs.db

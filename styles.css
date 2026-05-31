@@ -1,0 +1,1063 @@
+/* Custom Styling for Joul - Notebook Theme */
+
+:root {
+  /* Design Tokens & Colors */
+  --color-desk: #1e1b18; /* Rich dark brown leather desk-mat background */
+  --color-desk-accent: #2e2620;
+  --color-paper: #fbf8f3; /* Premium ivory cream notebook paper */
+  --color-paper-shadow: rgba(0, 0, 0, 0.25);
+  
+  /* Notebook Lines */
+  --color-margin-line: #f19895; /* Salmon pink red vertical margin line */
+  --color-ruled-line: #dbe4f0; /* Gentle blue ruled writing line */
+  
+  /* Ink Colors */
+  --color-ink: #1c2833; /* Dark slate ink */
+  --color-ink-faint: #566573;
+  --color-primary: #34495e;
+  --color-accent: #c0392b; /* Crimson red accent */
+  --color-success: #27ae60;
+  
+  /* Modern Elements */
+  --font-sans: 'Outfit', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-handwriting: 'Comic Sans MS', 'Comic Sans', cursive;
+  
+  /* Transitions */
+  --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-fast: all 0.15s ease-in-out;
+}
+
+/* Reset & Scrollbar */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-desk);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+/* Desk Mat Container */
+.desk-mat {
+  width: 100vw;
+  min-height: 100vh;
+  padding: 2.5rem;
+  background: radial-gradient(circle at center, var(--color-desk-accent) 0%, var(--color-desk) 100%);
+  background-image: 
+    radial-gradient(circle at center, rgba(46, 38, 32, 0.8) 0%, rgba(30, 27, 24, 0.95) 100%),
+    url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.15'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z'/%3E%3C/g%3E%3C/svg%3E");
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* App Branding Header */
+.app-branding {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem;
+}
+
+.app-branding .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #f3e9dc;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.app-branding .logo i {
+  color: #d4a373;
+  transform: rotate(-15deg);
+}
+
+/* Sync status banner */
+.sync-banner {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.sync-status {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sync-status i {
+  color: var(--color-success);
+}
+
+.sync-status.working i {
+  color: #3498db;
+}
+
+.sync-status.offline i {
+  color: #e67e22;
+}
+
+/* Notebook Container (Double-page layout) */
+.notebook-container {
+  width: 100%;
+  max-width: 1460px; /* Expanded to 1460px so that at 1:1 split, both sides are highly spacious */
+  min-height: 750px;
+  background-color: #5d4037; /* Leather binder edges */
+  border-radius: 12px;
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.5), 
+    0 5px 15px rgba(0, 0, 0, 0.3),
+    inset 0 0 10px rgba(0, 0, 0, 0.6);
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Symmetric 1:1 ratio split */
+  position: relative;
+  overflow: hidden;
+  border: 4px solid #3e2723;
+}
+
+/* Individual notebook page */
+.notebook-page {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  min-height: 100%;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 2.2rem 1.6rem 1.6rem 2.8rem; /* Optimized paddings to increase writing width */
+}
+
+.page-left {
+  border-radius: 6px 0 0 6px;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  /* Lined page left red margin line sitting at 36px */
+  background-image: 
+    linear-gradient(90deg, transparent 36px, var(--color-margin-line) 36px, var(--color-margin-line) 38px, transparent 38px);
+}
+
+.page-right {
+  border-radius: 0 6px 6px 0;
+  border-left: none;
+  background-image: 
+    linear-gradient(90deg, transparent 36px, var(--color-margin-line) 36px, var(--color-margin-line) 38px, transparent 38px);
+}
+
+.page-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+/* Journal Header Elements */
+.journal-header {
+  margin-bottom: 1.5rem;
+}
+
+.header-grid {
+  display: grid;
+  grid-template-columns: 1.8fr 1.2fr 1.1fr 1.1fr;
+  gap: 0.8rem;
+}
+
+.field-box {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.field-box label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.field-box label i {
+  font-size: 0.85rem;
+}
+
+.text-amber { color: #f39c12; }
+.text-indigo { color: #8e44ad; }
+
+/* Hand-written general styles */
+.handwritten-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px dotted var(--color-ink-faint);
+  font-family: var(--font-handwriting);
+  font-size: 1.5rem;
+  color: var(--color-ink);
+  padding: 0.25rem 0.5rem;
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.handwritten-input:focus {
+  border-bottom-style: solid;
+  border-bottom-color: var(--color-accent);
+}
+
+input[type="date"].handwritten-input,
+input[type="time"].handwritten-input {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+/* Premium Webkit Time Input Styling to avoid layout clipping and highlight AM/PM */
+input[type="time"]::-webkit-datetime-edit {
+  display: inline-flex;
+  align-items: center;
+}
+
+input[type="time"]::-webkit-datetime-edit-fields-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+}
+
+input[type="time"]::-webkit-datetime-edit-hour-field,
+input[type="time"]::-webkit-datetime-edit-minute-field {
+  padding: 0px 2px;
+  border-radius: 3px;
+  transition: var(--transition-fast);
+}
+
+input[type="time"]::-webkit-datetime-edit-hour-field:focus,
+input[type="time"]::-webkit-datetime-edit-minute-field:focus {
+  background-color: rgba(0, 0, 0, 0.08);
+  color: var(--color-primary);
+}
+
+body.dark-theme input[type="time"]::-webkit-datetime-edit-hour-field:focus,
+body.dark-theme input[type="time"]::-webkit-datetime-edit-minute-field:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+input[type="time"]::-webkit-datetime-edit-ampm-field {
+  background-color: rgba(192, 57, 43, 0.08); /* Premium subtle light theme crimson red capsule */
+  color: var(--color-accent);
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 4px;
+  margin-left: 4px;
+  text-transform: uppercase;
+  font-size: 0.85em;
+  transition: var(--transition-smooth);
+}
+
+body.dark-theme input[type="time"]::-webkit-datetime-edit-ampm-field {
+  background-color: rgba(231, 76, 60, 0.15); /* Premium neon red capsule in dark theme */
+  color: #e74c3c;
+}
+
+/* Custom Clock Icon Styling */
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(20%) sepia(10%) saturate(1500%) hue-rotate(180deg) brightness(95%) contrast(90%);
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 4px;
+  transition: var(--transition-smooth);
+}
+
+body.dark-theme input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(90%) sepia(5%) saturate(100%) hue-rotate(200deg) brightness(100%) contrast(90%);
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  transform: scale(1.1);
+}
+
+body.dark-theme input[type="time"]::-webkit-calendar-picker-indicator:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Journal Sections */
+.journal-section {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+  padding-bottom: 0.25rem;
+}
+
+.section-title i {
+  font-size: 1.1rem;
+  color: var(--color-accent);
+}
+
+/* Lined paper setup */
+.paper-lines {
+  position: relative;
+  background-image: linear-gradient(var(--color-ruled-line) 1px, transparent 1px);
+  background-size: 100% 2rem; /* spacing for ruled lines */
+  margin-top: 0.25rem;
+}
+
+.handwritten-textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-handwriting);
+  font-size: 1.6rem;
+  line-height: 2rem; /* Matches the background-size height perfectly */
+  color: var(--color-ink);
+  resize: vertical;
+  min-height: 12rem;
+  padding: 0 0.5rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+#notes-input {
+  min-height: 8rem;
+}
+
+/* Tri-Column section on the right page */
+.tri-columns-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5rem; /* Reduced gap to maximize width */
+  margin-bottom: 1.5rem;
+}
+
+.tri-column {
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.01);
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  padding: 0.35rem; /* Saved padding space for textarea */
+}
+
+.column-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.column-win .column-title { color: #27ae60; }
+.column-fail .column-title { color: #c0392b; }
+.column-next .column-title { color: #2980b9; }
+
+.column-paper {
+  background-image: linear-gradient(var(--color-ruled-line) 1px, transparent 1px);
+  background-size: 100% 1.8rem;
+}
+
+.column-paper textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-handwriting);
+  font-size: 1.45rem;
+  line-height: 1.8rem;
+  color: var(--color-ink);
+  resize: none;
+  min-height: 12.6rem;
+  padding: 0 0.25rem;
+}
+
+/* Habit Tracker Section */
+.habit-section {
+  margin-bottom: 1.5rem;
+}
+
+.section-subtitle {
+  font-size: 0.8rem;
+  color: var(--color-ink-faint);
+  margin-bottom: 1rem;
+  margin-top: -0.5rem;
+  font-style: italic;
+}
+
+.habits-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.6rem;
+  background: rgba(0, 0, 0, 0.01);
+  padding: 0.5rem;
+  border-radius: 6px;
+}
+
+.habit-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.25rem 0.5rem;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.05);
+}
+
+.habit-item:last-child {
+  border-bottom: none;
+}
+
+/* Premium Notebook Checkbox */
+.custom-checkbox {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 24px;
+  width: 24px;
+  background-color: transparent;
+  border: 2px solid var(--color-primary);
+  border-radius: 4px;
+  transition: var(--transition-fast);
+}
+
+.custom-checkbox:hover input ~ .checkmark {
+  background-color: rgba(52, 73, 94, 0.05);
+  border-color: var(--color-accent);
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.custom-checkbox input:checked ~ .checkmark::after {
+  display: block;
+}
+
+.custom-checkbox .checkmark::after {
+  left: 8px;
+  top: 4px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Double-click editable label or inline input */
+.habit-label-wrapper {
+  flex-grow: 1;
+}
+
+.habit-name-input {
+  width: 100%;
+  font-size: 1.4rem;
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  padding: 0.1rem 0.25rem;
+  color: var(--color-ink);
+  font-family: var(--font-handwriting);
+  outline: none;
+  cursor: pointer;
+}
+
+.habit-name-input:focus {
+  border-bottom: 1px dashed var(--color-accent);
+  background: rgba(0, 0, 0, 0.02);
+  cursor: text;
+}
+
+/* Page footer buttons & indicators */
+.page-right-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #a0281b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(192, 57, 43, 0.3);
+}
+
+.btn-secondary {
+  background-color: #eaeded;
+  color: var(--color-primary);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.btn-secondary:hover {
+  background-color: #d5dbdb;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-sync {
+  background: var(--color-success);
+  color: #fff;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.75rem;
+  border-radius: 20px;
+  box-shadow: none;
+}
+
+.btn-sync:hover {
+  background: #219653;
+}
+
+.btn-sync.active {
+  background: #3498db;
+}
+
+.saved-indicator {
+  font-size: 0.8rem;
+  color: var(--color-ink-faint);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.saved-indicator.saving {
+  color: #2980b9;
+  opacity: 1;
+}
+
+/* Sliding Sidebar panel for journal navigation */
+.sidebar-panel {
+  position: fixed;
+  right: -320px;
+  top: 0;
+  bottom: 0;
+  width: 320px;
+  background: rgba(25, 23, 22, 0.95);
+  backdrop-filter: blur(15px);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 100;
+  transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar-panel.open {
+  right: 0;
+}
+
+/* Toggle tab that floats */
+.sidebar-tab {
+  position: absolute;
+  left: -48px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #8e7a6b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  padding: 1.25rem 0.75rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: -5px 5px 15px rgba(0,0,0,0.3);
+}
+
+.sidebar-tab i {
+  font-size: 1.2rem;
+  color: #f3e9dc;
+}
+
+.sidebar-tab span {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  writing-mode: vertical-rl;
+  color: #f3e9dc;
+  font-weight: 600;
+}
+
+.sidebar-content {
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sidebar-content h3 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  color: #f3e9dc;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-desc {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+/* Calendar nav in sidebar */
+.calendar-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.btn-icon {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: var(--transition-fast);
+}
+
+.btn-icon:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.calendar-display {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #d4a373;
+}
+
+/* List of past journal files */
+.entries-list {
+  list-style: none;
+  overflow-y: auto;
+  flex-grow: 1;
+  margin-bottom: 1.5rem;
+}
+
+.entries-list li {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  border-left: 3px solid transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.entries-list li:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-left-color: #d4a373;
+}
+
+.entries-list li.active {
+  background: rgba(212, 163, 115, 0.15);
+  border-left-color: #d4a373;
+  font-weight: 500;
+}
+
+.entry-date {
+  font-size: 0.85rem;
+  color: #fff;
+}
+
+.entry-meta {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.4);
+}
+
+.empty-list-message {
+  text-align: center;
+  font-style: italic;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.4);
+  padding: 2rem 0;
+}
+
+.sidebar-footer {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 1rem;
+}
+
+.theme-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.7);
+}
+
+.font-toggle-group {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 2px;
+}
+
+.btn-toggle {
+  background: transparent;
+  border: none;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.6);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-toggle.active {
+  background: #d4a373;
+  color: #000;
+  font-weight: 600;
+}
+
+/* Modern font toggle mode on the notebook textareas */
+body.font-theme-modern .handwritten-textarea,
+body.font-theme-modern .handwritten-input,
+body.font-theme-modern .habit-name-input {
+  font-family: var(--font-sans) !important;
+  font-size: 0.95rem !important;
+  line-height: 1.5rem !important;
+  font-weight: 400;
+}
+
+body.font-theme-modern .description-section .paper-lines {
+  background-size: 100% 1.5rem;
+}
+
+body.font-theme-modern .notes-section .paper-lines {
+  background-size: 100% 1.5rem;
+}
+
+body.font-theme-modern .column-paper {
+  background-size: 100% 1.5rem;
+}
+
+body.font-theme-modern .column-paper textarea {
+  font-size: 0.9rem !important;
+  line-height: 1.5rem !important;
+}
+
+/* Notification Toast */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translate(-50%, 100px);
+  background: rgba(25, 23, 22, 0.95);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.toast.show {
+  transform: translate(-50%, 0);
+}
+
+.toast i {
+  color: var(--color-success);
+}
+
+/* Responsiveness */
+@media (max-width: 1100px) {
+  .notebook-container {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  
+  .notebook-spine {
+    display: none;
+  }
+  
+  .notebook-page {
+    padding: 2rem 1.5rem;
+    border-radius: 8px !important;
+    margin-bottom: 1.5rem;
+    border: none !important;
+    background-image: 
+      linear-gradient(90deg, transparent 29px, var(--color-margin-line) 29px, var(--color-margin-line) 31px, transparent 31px);
+  }
+  
+  .notebook-page:last-child {
+    margin-bottom: 0;
+  }
+  
+  .desk-mat {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .header-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  
+  .tri-columns-section {
+    grid-template-columns: 1fr;
+  }
+  
+  .column-paper textarea {
+    min-height: 8rem;
+  }
+  
+  .app-branding {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .sync-banner {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .header-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* ==========================================================================
+   Light / Dark Theme Styles & Transitions
+   ========================================================================== */
+
+/* Theme controls and toggle button */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-theme-toggle {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f3e9dc;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.15rem;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  outline: none;
+}
+
+.btn-theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.08);
+  border-color: #d4a373;
+}
+
+.btn-theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Super smooth transition properties */
+body, 
+.notebook-page, 
+.handwritten-textarea, 
+.handwritten-input, 
+.habit-name-input, 
+.tri-column, 
+.custom-checkbox .checkmark {
+  transition: 
+    background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+    color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+    border-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Dark Mode Variables Override */
+body.dark-theme {
+  --color-desk: #0c0b0a; /* Sleek charcoal leather desk mat */
+  --color-desk-accent: #171513;
+  --color-paper: #1c1d1f; /* Obsidian dark notebook paper */
+  --color-paper-shadow: rgba(0, 0, 0, 0.6);
+  
+  /* Lined Paper in Dark Mode */
+  --color-margin-line: #e74c3c; /* Neon red vertical margin line */
+  --color-ruled-line: #2d3135; /* Faint writing rows */
+  
+  /* Ink & Typography in Dark Mode */
+  --color-ink: #ecf0f1; /* Glowing light platinum ink */
+  --color-ink-faint: #7f8c8d;
+  --color-primary: #a5b1c2; /* Faint labels */
+  --color-accent: #e74c3c; /* Neon red win/fail accents */
+}
+
+/* Specific Dark Mode overrides for components */
+body.dark-theme .notebook-container {
+  background-color: #2b1f1d; /* Slightly darker leather binding */
+  border-color: #1a1312;
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.7), 
+    0 5px 15px rgba(0, 0, 0, 0.5),
+    inset 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+body.dark-theme .handwritten-input {
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+body.dark-theme .btn-secondary {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .btn-secondary:hover {
+  background-color: #34495e;
+}
+
+body.dark-theme .custom-checkbox:hover input ~ .checkmark {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-theme .checkmark {
+  border-color: var(--color-primary);
+}
+
+body.dark-theme .habit-item {
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-theme .tri-column {
+  background: rgba(255, 255, 255, 0.01);
+  border-color: rgba(255, 255, 255, 0.03);
+}
+
+body.dark-theme .column-title {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
